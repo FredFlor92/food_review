@@ -1,7 +1,11 @@
 class FoodreviewsController < ApplicationController
+  before'/users/*' do
+    authorized
+  end
 
   # GET: /foodreviews
   get "/foodreviews" do
+    @foodreview = current_user.foodreview
     erb :"/foodreviews/index.html"
   end
 

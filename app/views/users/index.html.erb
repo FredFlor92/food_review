@@ -1,1 +1,7 @@
-<h1>This is the Model's index page.</h1>
+<h1>All Users</h1>
+
+<ul>
+    <% @user.each do |user| %>
+        <li><%= user.name.upcase %></a></li>
+    <% end %>
+</ul>

@@ -42,6 +42,7 @@ class UsersController < ApplicationController
     redirect "/users/#{@user.id}"
    else
     redirect '/'
+   end 
   end
 
   get '/users/:id' do
@@ -67,7 +68,6 @@ class UsersController < ApplicationController
   # delete "/users/:id/delete" do
   #   redirect "/users"
   # end
-
   private 
   def set_user
     params[:name] != "" && params[:email] != "" && params[:password]
