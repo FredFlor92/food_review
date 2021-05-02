@@ -1,2 +1,5 @@
-class USER < ActiveRecord::Base
+class User < ActiveRecord::Base
+    has_secure_password
+
+    has_many :food_reviews
 end
