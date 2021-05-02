@@ -4,7 +4,7 @@ class FoodreviewsController < ApplicationController
   end
 
   get "/foodreviews" do
-    @foodreview = current_user.foodreviews
+    @foodreview = Foodreview.all
     erb :"/foodreviews/index.html"
   end
 
