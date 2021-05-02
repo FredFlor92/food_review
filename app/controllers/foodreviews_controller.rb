@@ -3,39 +3,71 @@ class FoodreviewsController < ApplicationController
     authorized
   end
 
-  # GET: /foodreviews
   get "/foodreviews" do
-    @foodreview = current_user.foodreview
+    @foodreview = Foodreview.all
     erb :"/foodreviews/index.html"
   end
 
-  # GET: /foodreviews/new
   get "/foodreviews/new" do
     erb :"/foodreviews/new.html"
   end
 
-  # POST: /foodreviews
-  post "/foodreviews" do
-    redirect "/foodreviews"
+  post "/foodreviews/new" do
+    if entry
+      @foodreview = Foodreview.create(content: params[:content], user_id: current_user.id)
+      redirect "/foodreviews/#{@foodreview.id}"
+    else
+      redirect '/foodreviews/new'
+    end 
   end
 
-  # GET: /foodreviews/5
   get "/foodreviews/:id" do
-    erb :"/foodreviews/show.html"
+    @foodreview = find_reviews
+    if @foodreview.user == current_user  
+      erb :"/foodreviews/show.html"
+    else
+      redirect "/users/#{current_user.id}"
+    end 
   end
 
-  # GET: /foodreviews/5/edit
+
   get "/foodreviews/:id/edit" do
-    erb :"/foodreviews/edit.html"
+    @foodreview = find_reviews
+    if @foodreview.user == current_user
+      erb :"/foodreviews/edit.html"
+    else
+      redirect "/users/#{current_user.id}"
+    end 
   end
 
-  # PATCH: /foodreviews/5
   patch "/foodreviews/:id" do
-    redirect "/foodreviews/:id"
+    @foodreview = find_reviews
+    if entry 
+      @foodreview.update(content: params[:content])
+      redirect "/foodreviews/#{@foodreview.id}"
+    else 
+      redirect '/foodreviews'
+    end
   end
 
-  # DELETE: /foodreviews/5/delete
   delete "/foodreviews/:id/delete" do
-    redirect "/foodreviews"
+    @foodreview = find_reviews
+    if @foodreview.user == current_user
+      @foodreview.destroy
+      redirect '/foodreviews'
+    else
+      redirect "/users/#{current_user.id}"
+    end 
   end
+
+  private 
+
+  def entry
+    params[:content] != ""
+  end 
+
+  def find_reviews
+    Foodreview.find_by(id: params[:id])
+  end 
+
 end

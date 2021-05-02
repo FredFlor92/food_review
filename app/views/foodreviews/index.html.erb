@@ -1,1 +1,7 @@
-<h1>This is the Model's index page.</h1>
+All Restaurant Reviews
+
+<% @foodreview.each do |foodreview| %>
+    <h4><%=foodreview.created_at %></h4>
+    <p><a href="/foodreviews/<% foodreview.id %>"><%= foodreview.content %></a></p>
+    <br><br>
+<% end %>

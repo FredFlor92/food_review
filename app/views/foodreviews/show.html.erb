@@ -1,1 +1,12 @@
-<h1>This is the show page for an individual instance of your model.</h1>
+NEW ENTRIE'S!
+
+<p><%= @foodreview.content %></p>
+
+<% if authorized %>
+<a href="foodreviews/<%= @foodreview.id %>/edit">Edit Entry</a>
+<br><br>
+<form class="" action="/foodreviews/<%%= @foodreview.id %>" method="post">
+<input type="hidden" name="_method" value="DELETE">
+<input type="submit" name="" value="Delete this Entry">
+</form>
+<% end %>

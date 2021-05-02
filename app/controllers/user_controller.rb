@@ -36,7 +36,7 @@ class UsersController < ApplicationController
   end
 
   post '/login' do
-   @user = user_name 
+   @user = user_email 
    if @user && @user.authenticate(params[:password])
     session[:user_id] = @user.id
     redirect "/users/#{@user.id}"
@@ -70,14 +70,14 @@ class UsersController < ApplicationController
   # end
   private 
   def set_user
-    params[:name] != "" && params[:email] != "" && params[:password]
+   params[:email] != "" && params[:password]
   end
 
   def set_user_id
     User.find_by(id: params[:id])
   end 
 
-  def user_name
-    User.find_by(name: params[:name])
+  def user_email
+    User.find_by(email: params[:email])
   end 
 end
