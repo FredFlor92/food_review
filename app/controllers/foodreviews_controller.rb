@@ -1,10 +1,10 @@
 class FoodreviewsController < ApplicationController
-  before'/users/*' do
+  before '/foodreviews/*' do
     authorized
   end
 
   get "/foodreviews" do
-    @foodreview = Foodreview.all
+    @foodreview = current_user.foodreviews
     erb :"/foodreviews/index.html"
   end
 
@@ -12,7 +12,7 @@ class FoodreviewsController < ApplicationController
     erb :"/foodreviews/new.html"
   end
 
-  post "/foodreviews/new" do
+  post "/foodreviews" do
     if entry
       @foodreview = Foodreview.create(content: params[:content], user_id: current_user.id)
       redirect "/foodreviews/#{@foodreview.id}"
@@ -50,7 +50,7 @@ class FoodreviewsController < ApplicationController
     end
   end
 
-  delete "/foodreviews/:id/delete" do
+  delete "/foodreviews/:id" do
     @foodreview = find_reviews
     if @foodreview.user == current_user
       @foodreview.destroy

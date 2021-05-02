@@ -1,8 +1,8 @@
 Edit form
 
-<form class="" action="/foodreviews/<%= @foodreview.id%>" method="post">
+<form action="/foodreviews/<%= @foodreview.id %>" method="post">
     <input type="hidden" name="_method" value="patch">
-    <label for="content">Content:</label>
-    <textarea name="content" style="width:auto; height:auto,"><%= @foodreview.content%></textarea>
-    <input type="submit" name="" value="Edit Entry">
+    <label for="content">Review:</label>
+    <textarea name="content" id="content" style="width:auto; height:auto,"><%= @foodreview.content %></textarea>
+    <input type="submit" value="Edit Entry">
 </form>

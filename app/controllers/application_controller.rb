@@ -1,6 +1,5 @@
-#require './config/environment'
-
 class ApplicationController < Sinatra::Base
+  register Sinatra::ActiveRecordExtension
 
   configure do
     set :public_folder, 'public'
@@ -25,7 +24,7 @@ class ApplicationController < Sinatra::Base
     def current_user
       @current_user ||= User.find_by(id: session[:user_id])
     end
-    
+
     def authorized
       redirect '/' if !logged_in?
     end

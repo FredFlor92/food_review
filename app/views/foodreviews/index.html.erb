@@ -1,7 +1,9 @@
-All Restaurant Reviews
+All Food Reviews
 
-<% @foodreview.each do |foodreview| %>
-    <h4><%=foodreview.created_at %></h4>
-    <p><a href="/foodreviews/<% foodreview.id %>"><%= foodreview.content %></a></p>
-    <br><br>
-<% end %>
+
+<ul>
+    <% @foodreview.each do |foodreview| %>
+        <li><a href="/foodreviews/<%= foodreview.id%>"><%= foodreview.content %></a></li>
+        <p><%= foodreview.created_at %></p>
+    <% end %>
+</ul>

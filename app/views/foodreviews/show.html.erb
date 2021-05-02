@@ -1,12 +1,11 @@
-NEW ENTRIE'S!
+NEW ENTRIES!
 
 <p><%= @foodreview.content %></p>
+<p><%= @foodreview.created_at %></p>
+ 
+<a href="/foodreviews/<%= @foodreview.id %>/edit">Edit Entry</a>
 
-<% if authorized %>
-<a href="foodreviews/<%= @foodreview.id %>/edit">Edit Entry</a>
-<br><br>
-<form class="" action="/foodreviews/<%%= @foodreview.id %>" method="post">
-<input type="hidden" name="_method" value="DELETE">
-<input type="submit" name="" value="Delete this Entry">
+<form action="/foodreviews/<%= @foodreview.id %>" method= "post">
+    <input type="hidden" name="_method" value="delete"> 
+    <input type="submit" value="delete">
 </form>
-<% end %>
