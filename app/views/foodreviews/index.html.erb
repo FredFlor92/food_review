@@ -1,9 +1,14 @@
-All Food Reviews
+
+ <br><br>
+All Food Reviews!
 
 
 <ul>
+        <br><br>
     <% @foodreview.each do |foodreview| %>
         <li><a href="/foodreviews/<%= foodreview.id%>"><%= foodreview.content %></a></li>
         <p><%= foodreview.created_at %></p>
+        <p> By <%= foodreview.user.name %></p>
+        <br><br>
     <% end %>
 </ul>
