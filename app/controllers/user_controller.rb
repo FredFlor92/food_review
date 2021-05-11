@@ -18,7 +18,7 @@ class UsersController < ApplicationController
   end
 
   post "/users" do
-    if set_user
+    if set_user && !user_email
       @user = User.create(params)
       session[:user_id] = @user.id
       redirect "/users/#{@user.id}"

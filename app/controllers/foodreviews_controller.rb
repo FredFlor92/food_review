@@ -1,6 +1,6 @@
 class FoodreviewsController < ApplicationController
   before '/foodreviews/*' do
-    authorized
+    redirect_if_not_logged_in
   end
 
   get "/foodreviews" do
@@ -23,21 +23,15 @@ class FoodreviewsController < ApplicationController
 
   get "/foodreviews/:id" do
     @foodreview = find_reviews
-    if @foodreview.user == current_user  
-      erb :"/foodreviews/show.html"
-    else
-      redirect "/users/#{current_user.id}"
-    end 
+    redirect_if_not_authorized
+    erb :"/foodreviews/show.html"
   end
 
 
   get "/foodreviews/:id/edit" do
     @foodreview = find_reviews
-    if @foodreview.user == current_user
+    redirect_if_not_authorized
       erb :"/foodreviews/edit.html"
-    else
-      redirect "/users/#{current_user.id}"
-    end 
   end
 
   patch "/foodreviews/:id" do
@@ -52,12 +46,9 @@ class FoodreviewsController < ApplicationController
 
   delete "/foodreviews/:id" do
     @foodreview = find_reviews
-    if @foodreview.user == current_user
-      @foodreview.destroy
-      redirect '/foodreviews'
-    else
-      redirect "/users/#{current_user.id}"
-    end 
+    redirect_if_not_authorized
+    @foodreview.destroy
+    redirect '/foodreviews'
   end
 
   private 
